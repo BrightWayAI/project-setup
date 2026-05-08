@@ -8,6 +8,18 @@ Short interview that captures the catalog `/project-setup` needs to be useful fo
 
 ---
 
+## Pre-step — Read shared identity (if available)
+
+Before asking identity-style questions (name, company, role), check whether `~/Documents/Claude/identity.md` exists. This is a shared identity file populated by cortex's `/setup-identity` command — every BrightWayAI marketplace plugin reads it.
+
+- **If it exists and is populated:** read it. Use the values to pre-fill Section 1 (Identity) of this interview. Skip those questions; just confirm what you read.
+- **If it doesn't exist:** offer the user:
+  > "There's a shared identity file (`/setup-identity` in cortex) that other plugins read too — capture name/company/role/tools once and every plugin uses it. Want to run `/setup-identity` first (recommended, ~2 min), or capture identity inline here only?"
+  - "Run /setup-identity first" → route there, then resume.
+  - "Inline" → proceed normally.
+
+---
+
 ## Step 1 — Check for existing config
 
 Read `references/user-context.md`. Populated → ask whether to update. Missing → start fresh.
