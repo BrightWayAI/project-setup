@@ -16,7 +16,7 @@ Extract:
 - Identity (your name, company, what you do)
 - Offerings catalog (your service offerings, with names and durations)
 - Drive layout (where Active Clients lives, naming conventions)
-- Companion plugins (cortex installed → run memory init; brightway-core installed → can pull pipeline context)
+- Companion plugins (cortex installed → run memory init; core-ops installed → can pull pipeline context)
 - Communication defaults (default cadence, response time)
 
 Read the template files:

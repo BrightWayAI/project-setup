@@ -48,7 +48,7 @@ After capturing, edit `references/templates/project-plans.md` to add or update e
 
 ### Section 5 — Companion plugins
 - Is `claude-cortex` installed? (Y/N — drives whether memory node init runs in Output 4)
-- Is `brightway-core` installed? (Y/N — provides pipeline-analyst for periodic engagement reviews)
+- Is `core-ops` installed? (Y/N — provides pipeline-analyst for periodic engagement reviews)
 - Is `weekly-outreach` installed? (Y/N — useful context if engagements often come from outreach pipeline)
 
 ---
@@ -87,7 +87,7 @@ _Last updated: [date]_
 
 ## Companion plugins
 - **claude-cortex:** ...
-- **brightway-core:** ...
+- **core-ops:** ...
 - **weekly-outreach:** ...
 ```
 

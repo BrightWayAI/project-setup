@@ -47,7 +47,7 @@ Edit these to match your firm. They're committed to your fork (or to your local 
 ## Companion plugins
 
 - **claude-cortex** — for memory node initialization. If not installed, project-setup skips Output 4.
-- **brightway-core** — for pipeline-analyst integration when reviewing recently-signed deals.
+- **core-ops** — for pipeline-analyst integration when reviewing recently-signed deals.
 
 Works without them.
 
