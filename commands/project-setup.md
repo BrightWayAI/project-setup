@@ -148,6 +148,52 @@ After committing, confirm: "Memory node `client:[name]` created — future sessi
 
 If cortex is NOT installed, skip Output 4 and note in the final response that memory init was skipped.
 
+### Output 5: Primary contact person page (cortex v4.2+)
+
+**Only if cortex is installed.** This is graduation trigger #3 in cortex's CLAUDE.md schema — when project-setup names a primary contact, that person should have a canonical page.
+
+1. Resolve `<config-root>` via the standard pointer.
+2. Compute slug from the primary contact's name: `firstname-lastname` lowercased, hyphenated.
+3. Check for name collision: if `<config-root>/memory/person/<slug>.md` already exists about someone else (different company / email), prompt the user once to disambiguate. Recommend appending the client slug: `<slug>-<client-name-lowercased>.md`.
+4. **If the page does NOT exist** → create it using cortex's person-page schema:
+
+```markdown
+# person:[firstname-lastname]
+> Last updated: [today]
+
+## Identity
+- **Full name:** [Primary contact full name]
+- **Title / role:** [Title]
+- **Company:** [client/[client-name-lowercase]]
+- **Email:** [email if known]
+- **LinkedIn / other:** [if known]
+- **First mentioned:** [today] (project-setup for [client-name])
+
+## Relationship
+- **How we know each other:** Primary contact on the [offering] engagement. Kickoff [date].
+- **Relationship temperature:** Active
+- **Last meaningful contact:** [today] (kickoff prep)
+- **Relationship owner:** [you]
+
+## Recent interactions (last 90 days, append-only)
+- [today] — project-setup — primary contact for new engagement [client-name]
+
+## Open threads
+- [P0] Complete Phase 1 kickoff activities (linked to [client/[client-name-lowercase]])
+
+## Notes
+[Any context from the interview that's specific to this person, not the client/company]
+
+## Linked entities
+- Projects: [client/[client-name-lowercase]]
+```
+
+5. **If the page DOES exist** (returning client, or same person appeared in a prior engagement) → append a Recent interaction line: `[today] — project-setup — primary contact for new engagement [client-name]`. Append `[client/[client-name-lowercase]]` to Linked entities if not already present. Refresh Relationship temperature to Active.
+
+6. Add or refresh the "Active people" row in `<config-root>/memory/DASHBOARD.md`.
+
+If cortex is NOT installed, skip this output silently (consistent with Output 4).
+
 ---
 
 ## Tone & behavior notes

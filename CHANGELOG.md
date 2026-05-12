@@ -4,6 +4,17 @@ All notable changes to project-setup are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.2.4] — Primary contact person page (2026-05-12)
+
+### Added
+- **Output 5 — Primary contact person page (cortex graduation trigger #3).** When project-setup names a primary contact for a new engagement, the plugin now creates `<config-root>/memory/person/<slug>.md` using cortex's person-page schema. Identity, Relationship (temperature: Active, owner: you), Recent interactions (seeded with the kickoff entry), Open threads (Phase 1 kickoff P0), and Linked entities (the new client node) are pre-filled from the interview.
+- **Returning client handling.** If the primary contact already has a graduated page (e.g., a returning client), the output is additive: append a Recent-interactions line for the new engagement, link the new `client/<name>` node to Linked entities, refresh Relationship temperature to Active.
+- **Name-collision disambiguation.** If two people would slug to the same name (different company / email), prompts the user and recommends appending a client-name hint (`<slug>-<client>.md`).
+- **Graceful degradation.** Skipped silently if cortex isn't installed (matches Output 4's behavior).
+
+### Why this matters
+Phase 3 of SECOND-BRAIN-V2-SPEC. New-engagement primary contacts are unambiguously page-worthy — they're who the user works with on the entire project. Creating the page at engagement initialization means cortex has context on the relationship from day one rather than waiting for organic graduation triggers to fire.
+
 ## [0.2.3] — Platform-agnostic Step 0 (2026-05-12)
 
 ### Changed
