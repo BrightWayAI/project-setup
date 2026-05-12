@@ -15,7 +15,7 @@ A new client signs. You run `/project-setup`. Five minutes later: Drive folder s
 
 ## Install
 
-Recommended: via the [BrightWayAI marketplace](https://github.com/BrightWayAI/claude-plugins).
+Recommended: via the [BrightWayAI marketplace](https://github.com/BrightWayAI/nucleus).
 
 ```
 /plugin marketplace add BrightWayAI/project-setup
