@@ -13,4 +13,4 @@ See `commands/setup-projects.md` for the full interview.
 
 ## Quick path
 
-If the user wants minimum-viable defaults to start: write a placeholder `references/user-context.md` with one generic "Consulting Engagement" offering. The plugin will work but outputs will be generic. Recommend running the full interview when ready to capture real offerings.
+If the user wants minimum-viable defaults to start: write a placeholder `<config-root>/plugins/project-setup.user-context.md` with one generic "Consulting Engagement" offering. The plugin will work but outputs will be generic. Recommend running the full interview when ready to capture real offerings.

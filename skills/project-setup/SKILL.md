@@ -13,7 +13,7 @@ See `commands/project-setup.md` for the full workflow.
 
 ## Pre-flight check
 
-Confirm `references/user-context.md` exists with at least one offering configured. If missing, route to `/setup-projects` first — without an offerings catalog and template customizations, the outputs will be generic.
+Confirm `<config-root>/plugins/project-setup.user-context.md` exists with at least one offering configured. If missing, route to `/setup-projects` first — without an offerings catalog and template customizations, the outputs will be generic.
 
 ## What this skill is *not* for
 

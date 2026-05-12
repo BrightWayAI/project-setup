@@ -10,7 +10,7 @@ End-to-end client engagement initialization. A new client signs → run this com
 
 ## Step 0 — Preflight
 
-Read `references/user-context.md`. If missing, route to `/setup-projects` and stop.
+Read `<config-root>/plugins/project-setup.user-context.md`. If missing, route to `/setup-projects` and stop.
 
 Extract:
 - Identity (your name, company, what you do)

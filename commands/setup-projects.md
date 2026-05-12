@@ -1,5 +1,5 @@
 ---
-description: Configure project-setup for your offerings, drive layout, and companion-plugin integrations. Captures your service catalog so /project-setup can interview clients and produce templated outputs that match your firm. Re-run anytime to add or update offerings.
+description: Configure project-setup for your offerings, drive layout, and companion-plugin integrations. Writes to `<config-root>/plugins/project-setup.user-context.md` (where `<config-root>` is the folder you choose during first-time setup, stored at `~/.claude-plugin-config-root`). Re-run anytime to add or update offerings.
 ---
 
 # /setup-projects
@@ -8,21 +8,46 @@ Short interview that captures the catalog `/project-setup` needs to be useful fo
 
 ---
 
-## Pre-step — Read shared identity (if available)
+## Step 0 — Resolve plugin config root
 
-Before asking identity-style questions (name, company, role), check whether `~/Documents/Claude/identity.md` exists. This is a shared identity file populated by cortex's `/setup-identity` command — every BrightWayAI marketplace plugin reads it.
+Per-plugin config in this marketplace lives under a user-chosen folder, recorded at `~/.claude-plugin-config-root` (single-line text file in the user's home directory). Resolve it before doing anything else.
 
-- **If it exists and is populated:** read it. Use the values to pre-fill Section 1 (Identity) of this interview. Skip those questions; just confirm what you read.
-- **If it doesn't exist:** offer the user:
-  > "There's a shared identity file (`/setup-identity` in cortex) that other plugins read too — capture name/company/role/tools once and every plugin uses it. Want to run `/setup-identity` first (recommended, ~2 min), or capture identity inline here only?"
-  - "Run /setup-identity first" → route there, then resume.
-  - "Inline" → proceed normally.
+### A — Try the pointer
+
+Call `request_cowork_directory(~)` once if not already granted, then read `~/.claude-plugin-config-root`.
+
+- **Pointer exists**: read line 1 → that's the config root path. Call `request_cowork_directory(<config-root>)` to mount it. Skip to section C.
+- **Pointer missing**: continue to section B.
+
+### B — First-time bootstrap
+
+This is the user's first plugin setup of any kind. Prompt:
+
+> "First-time plugin setup. Where should I store your plugin config — identity, voice, and per-plugin settings? Pick a folder you control. Examples: `~/Documents/Claude/` (a common pick — and where cortex memory already writes if you have it installed) or `~/Documents/PluginConfig/` or any other path you prefer. The folder will hold one `identity.md`, one `voice.md`, and a `plugins/` subdirectory with one file per plugin you set up."
+
+Once the user provides the path:
+
+1. Call `request_cowork_directory(<path>)` to mount it.
+2. Create `<path>/plugins/` if it doesn't exist.
+3. Write the absolute path to `~/.claude-plugin-config-root`.
+4. Confirm: "Saved. All marketplace plugin configs will live under `<path>` from now on. You can change this later by editing `~/.claude-plugin-config-root` directly."
+5. **Migration**: if `~/Documents/Claude/identity.md` or `~/Documents/Claude/voice.md` exists and `<path>` is *not* `~/Documents/Claude/`, ask: "Migrate existing identity.md / voice.md into `<path>`? (Y/N)" — if yes, copy them.
+6. **Pre-staged content**: if any `~/Documents/Claude/plugin-configs/*.user-context.md` files exist (a pattern from users who pre-populated configs), offer to copy them into `<path>/plugins/`.
+
+### C — Read shared identity
+
+Read `<config-root>/identity.md` (the canonical identity file populated by cortex's `/setup-identity`).
+
+- **Exists and populated** → pre-fill Section 1 (Identity) of this interview from those values. Skip those questions; just confirm what you read.
+- **Missing** → offer: "Want to capture name/company/role/tools once via `/setup-identity` (in cortex) so all marketplace plugins can read it? Or capture identity inline here only?" Route to `/setup-identity` if user prefers, then resume.
+
+For the rest of this document, **`<config-root>`** refers to the resolved path. This plugin's config file lives at **`<config-root>/plugins/project-setup.user-context.md`**.
 
 ---
 
 ## Step 1 — Check for existing config
 
-Read `references/user-context.md`. Populated → ask whether to update. Missing → start fresh.
+Read `<config-root>/plugins/project-setup.user-context.md`. Populated → ask whether to update. Missing → start fresh.
 
 ---
 
@@ -67,7 +92,7 @@ After capturing, edit `references/templates/project-plans.md` to add or update e
 
 ## Step 3 — Write the config
 
-Populate `references/user-context.md`:
+Populate `<config-root>/plugins/project-setup.user-context.md`:
 
 ```markdown
 # project-setup user context
